@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}Flappy Friend — Ready to Launch!{% endblock %}
+
+{% block content %}
+
+<section class="ready-hero">
+  <div class="ready-hero__bird">🎉</div>
+  <h1 class="ready-hero__title">
+    {% if launched %}
+      Game launched!
+    {% else %}
+      All set. Ready to fly!
+    {% endif %}
+  </h1>
+  <p class="ready-hero__sub">
+    {% if launched %}
+      {{ launch_message }}
+    {% else %}
+      Your friend photos are loaded. Hit launch or copy the command below.
+    {% endif %}
+  </p>
+</section>
+
+<!-- Preview cards -->
+<div class="preview-row">
+  <div class="preview-card">
+    <div class="preview-card__label">🕊️ Flying pose</div>
+    <img
+      class="preview-card__img"
+      src="{{ url_for('static', filename='uploads/' ~ friend_image) }}"
+      alt="Friend flying photo"
+    />
+    <div class="preview-card__name">{{ friend_image }}</div>
+  </div>
+
+  <div class="preview-vs">VS</div>
+
+  <div class="preview-card">
+    <div class="preview-card__label">⬆️ Jump pose</div>
+    <img
+      class="preview-card__img"
+      src="{{ url_for('static', filename='uploads/' ~ jump_image) }}"
+      alt="Friend jump photo"
+    />
+    <div class="preview-card__name">{{ jump_image }}</div>
+  </div>
+</div>
+
+<!-- Sound info -->
+<div class="sound-info">
+  🔊 Jump sound:
+  <strong>{{ jump_sound }}</strong>
+  {% if is_default_sound %}
+    <span class="badge badge--info">default</span>
+  {% else %}
+    <span class="badge badge--success">custom</span>
+  {% endif %}
+</div>
+
+<!-- Command box -->
+<div class="cmd-section">
+  <div class="cmd-section__label">Run this command to play:</div>
+  <div class="cmd-box">
+    <code id="cmdText">{{ command }}</code>
+    <button class="cmd-copy" onclick="copyCmd()">Copy</button>
+  </div>
+</div>
+
+<!-- Actions -->
+<div class="action-row">
+  <a href="{{ url_for('launch') }}" class="btn-launch">
+    <span class="btn-launch__icon">🚀</span>
+    <span class="btn-launch__text">Launch game now</span>
+  </a>
+  <a href="{{ url_for('reset') }}" class="btn-secondary">↩ Use different photos</a>
+</div>
+
+<!-- Launch note -->
+<p class="launch-note">
+  "Launch game now" runs the game directly on this machine via <code>subprocess</code>.<br>
+  If you're running the server remotely, copy the command and run it locally instead.
+</p>
+
+{% if launched %}
+<div class="launched-banner">
+  ✅ {{ launch_message }}
+</div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block title %}Flappy Friend — Upload & Play{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+  <div class="hero__bird">🐦</div>
+  <h1 class="hero__title">Make your friend<br>the <em>bird</em>.</h1>
+  <p class="hero__sub">Upload two photos, smash launch — watch them fly through pipes.</p>
+</section>
+
+<section class="upload-card">
+
+  <form action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data" id="uploadForm">
+
+    <div class="steps">
+
+      <!-- Step 1 -->
+      <div class="step">
+        <div class="step__num">01</div>
+        <div class="step__body">
+          <h2 class="step__title">Flying photo</h2>
+          <p class="step__desc">Normal pose shown while gliding through the air.</p>
+          <label class="dropzone" id="drop1" for="friend_image">
+            <input
+              type="file"
+              id="friend_image"
+              name="friend_image"
+              accept="image/png,image/jpeg,image/gif,image/webp"
+              required
+              class="dropzone__input"
+            />
+            <div class="dropzone__inner" id="drop1inner">
+              <span class="dropzone__icon">📁</span>
+              <span class="dropzone__text">Click or drag image here</span>
+              <span class="dropzone__hint">PNG · JPG · GIF · WEBP</span>
+            </div>
+            <img class="dropzone__preview" id="prev1" src="" alt="Preview" />
+          </label>
+        </div>
+      </div>
+
+      <div class="step-divider">
+        <span>+</span>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step">
+        <div class="step__num">02</div>
+        <div class="step__body">
+          <h2 class="step__title">Jump / flap photo</h2>
+          <p class="step__desc">The funny face shown every time they flap upward.</p>
+          <label class="dropzone" id="drop2" for="jump_image">
+            <input
+              type="file"
+              id="jump_image"
+              name="jump_image"
+              accept="image/png,image/jpeg,image/gif,image/webp"
+              required
+              class="dropzone__input"
+            />
+            <div class="dropzone__inner" id="drop2inner">
+              <span class="dropzone__icon">📁</span>
+              <span class="dropzone__text">Click or drag image here</span>
+              <span class="dropzone__hint">PNG · JPG · GIF · WEBP</span>
+            </div>
+            <img class="dropzone__preview" id="prev2" src="" alt="Preview" />
+          </label>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Sound -->
+    <div class="sound-row">
+      <label class="sound-label" for="jump_sound">
+        🔊 Jump sound
+        <span class="badge badge--info">optional</span>
+      </label>
+      <div class="sound-input-wrap">
+        <input
+          type="text"
+          id="jump_sound"
+          name="jump_sound"
+          class="sound-input"
+          placeholder="win.ogg"
+          value="win.ogg"
+        />
+        <span class="sound-default-note">Leave as-is to use the default</span>
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <button type="submit" class="btn-launch" id="submitBtn" disabled>
+      <span class="btn-launch__icon">▶</span>
+      <span class="btn-launch__text">Continue →</span>
+    </button>
+
+  </form>
+
+</section>
+
+<section class="how-it-works">
+  <h2 class="how__title">How it works</h2>
+  <div class="how__steps">
+    <div class="how__item">
+      <div class="how__emoji">📸</div>
+      <div class="how__label">Upload 2 photos</div>
+    </div>
+    <div class="how__arrow">→</div>
+    <div class="how__item">
+      <div class="how__emoji">⚙️</div>
+      <div class="how__label">We configure the game</div>
+    </div>
+    <div class="how__arrow">→</div>
+    <div class="how__item">
+      <div class="how__emoji">🚀</div>
+      <div class="how__label">Copy & run the command</div>
+    </div>
+    <div class="how__arrow">→</div>
+    <div class="how__item">
+      <div class="how__emoji">🎮</div>
+      <div class="how__label">Play!</div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
